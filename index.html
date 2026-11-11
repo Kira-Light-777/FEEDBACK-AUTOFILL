@@ -21,7 +21,15 @@ textarea{width:100%;height:90px;font:11px "IBM Plex Mono",monospace;margin-top:1
 <h1>ERP Feedback Helper</h1>
 <p class="sub">Fills the IIT KGP end-term feedback form for all your courses, then opens your admit card. You only pick your courses and type each captcha.</p>
 
-<h2>1 · Install (easiest, once)</h2>
+<h2>Fastest · no install, any browser</h2>
+<ol>
+<li>Log in to ERP and stay on any ERP page.</li>
+<li><button id="copycon" style="background:#1f4e79;color:#fff;border-color:#1f4e79">Copy for console</button><span id="okcon" style="margin-left:10px;color:#1e7e34;font-size:14px"></span><textarea id="rawcon" readonly style="display:none;width:100%;height:80px;font:11px monospace;margin-top:8px"></textarea></li>
+<li>On the ERP tab press <kbd>F12</kbd> (Mac: <kbd>Cmd+Option+J</kbd>), click the <b>Console</b> tab, paste with <kbd>Ctrl+V</kbd> / <kbd>Cmd+V</kbd> and press <b>Enter</b>. The KGP Feedback panel appears.</li>
+</ol>
+<p style="font-size:14px;color:#5b6472">The first time, Chrome/Edge/Firefox block pasting as a safety check: type <code>allow pasting</code>, press Enter, then paste again. Safari: first turn on <i>Settings → Advanced → Show features for web developers</i>, then use <kbd>Cmd+Option+C</kbd>. Only paste code into the console from people you trust; this one is open on <a href="https://github.com/Kira-Light-777/FEEDBACK-AUTOFILL">GitHub</a>.</p>
+
+<h2>Or: Tampermonkey (button appears on ERP by itself)</h2>
 <ol>
 <li>Install the free <b>Tampermonkey</b> extension: <a href="https://www.tampermonkey.net/" target="_blank" rel="noopener">tampermonkey.net</a> (Chrome, Edge, Brave, Firefox).</li>
 <li>Click <a class="bm" style="padding:6px 12px;font-size:14px;box-shadow:2px 2px 0 #0f2a44" href="kgp-feedback.user.js">Install KGP Feedback</a>, then press <b>Install</b> in the Tampermonkey tab that opens.</li>
@@ -309,4 +317,5 @@ const url='javascript:'+encodeURIComponent(s);
 const a=document.getElementById('bm');a.addEventListener('click',e=>{e.preventDefault();document.getElementById('ok').textContent='Drag it to the bookmarks bar instead of clicking.';});
 const raw=document.getElementById('raw');raw.value=url;
 document.getElementById('copy').onclick=async()=>{const ok=document.getElementById('ok');try{await navigator.clipboard.writeText(url);ok.textContent='Copied ✓';}catch(e){raw.style.display='block';raw.select();ok.textContent='Select all in the box below and copy it.';}};
+document.getElementById('copycon').onclick=async()=>{const ok=document.getElementById('okcon'),raw=document.getElementById('rawcon');try{await navigator.clipboard.writeText(s);ok.textContent='Copied ✓ Now paste it in the ERP console.';}catch(e){raw.value=s;raw.style.display='block';raw.select();ok.textContent='Select all in the box below and copy it.';}};
 </script></body></html>
